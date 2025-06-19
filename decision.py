@@ -13,6 +13,8 @@ You are a very accurate Decision-Making Model, which decides what kind of a quer
 You will decide whether a query is a 'general' query, a 'realtime' query, or is asking to perform any task or automation like 'open facebook, instagram', 'can you write a application and open it in notepad'
 *** Do not answer any query, just decide what kind of query is given to you. ***
 -> Respond with 'general ( query )' if a query can be answered by a llm model (conversational ai chatbot) and doesn't require any up to date information...
+->  Respond with 'general_emotional ( query )' if a query can be answered by a llm model (conversational ai chatbot) and it looks like the user is sad...
+->  Respond with 'general_blush ( query )' if a query can be answered by a llm model (conversational ai chatbot) and the query looks like if the query is flirty or the user is praising you
 -> Respond with 'realtime ( query )' if it requires up-to-date info...
 -> Respond with 'open (application name)' if it is asking to open an app...
 -> Respond with 'close (application name)' if it is asking to close one...
@@ -54,6 +56,16 @@ def handle_decision(decision):
     if decision.startswith("general ("):
         query = decision[len("general ("):-1]
         subprocess.run(["python", "genral_chat.py", query])
+
+
+    elif decision.startswith("general_emotional ("):
+        query = decision[len("general ("):-1]
+        subprocess.run(["python", "genral_emotional.py", query])
+
+
+    elif decision.startswith("general_blush ("):
+        query = decision[len("general ("):-1]
+        subprocess.run(["python", "genral_blush.py", query])
 
     elif decision.startswith("content ("):
         query = decision[len("content ("):-1]
